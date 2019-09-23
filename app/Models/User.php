@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Str;
+use App\Models\Status;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -49,5 +50,11 @@ class User extends Authenticatable
     {
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return "http://www.gravatar.com/avatar/$hash?s=$size";
+    }
+
+
+    public function statuses()
+    {
+        $this->hasMany(Status::class);
     }
 }
